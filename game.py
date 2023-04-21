@@ -3,13 +3,19 @@ import pygame
 import config
 from player import Player
 from game_state import GameState
+import spritesheet
+import gameWorld
+import random
+
+randX = random.uniform(0,1)
+randY = random.uniform(0,1)
+randI = random.uniform(0,1)
 
 class Game:
     def __init__(self, screen):
         self.screen = screen
         self.object = []
         self.game_state = GameState.NONE
-
 
     def set_up(self):
         print("do set up")
@@ -19,14 +25,16 @@ class Game:
         self.game_state = GameState.RUNNING
 
     def update(self):
-        self.screen.fill(config.BLACK)
         print("update")
         self.handle_events()
-        
+
+        gameWorld.createWorld()
+
         for object in self.object:
             object.render(self.screen)
-    
+
     def handle_events(self):
+        movement = 0.2
         x=0
         y=0
         for event in pygame.event.get():
@@ -35,14 +43,14 @@ class Game:
                 keys = pygame.key.get_pressed()
 
                 if keys[pygame.K_w]:
-                    y -= 1
+                    y -= movement
                     self.player.update_position(x, y)
                 if keys[pygame.K_s]:
-                    y += 1
+                    y += movement
                     self.player.update_position(x, y)
                 if keys[pygame.K_a]:
-                    x -= 1
+                    x -= movement
                     self.player.update_position(x, y)
                 if keys[pygame.K_d]:
-                    x += 1
+                    x += movement
                     self.player.update_position(x, y)

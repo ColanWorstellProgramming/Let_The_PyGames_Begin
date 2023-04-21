@@ -14,11 +14,6 @@ screen = pygame.display.set_mode([1920, 1080])
 
 pygame.display.set_caption('CloudScape Chronicles: Nimbus and Cirrus Edition')
 
-#Taylor
-clock = pygame.time.Clock()
-game = Game(screen)
-game.set_up()
-
 # Sprite Load
 grass = pygame.image.load('sprites/Tilesets/tiles/new/grass.png').convert_alpha()
 play = pygame.image.load('sprites/play.png').convert_alpha()
@@ -109,29 +104,17 @@ screen.blit(TitleBottom, (700, 32))
 #Update Display
 pygame.display.update()
 
-# Game Loop
-
 switch = False
 created = False
 
-running = True
-while running:
+while switch == False:
     for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-            running = False
-
-        # Taylor
-        clock.tick(10)
-        game.update()
-        pygame.display.flip()
-
-        # Checks if mouse is clicked
         if event.type == pygame.MOUSEBUTTONDOWN:
-
             if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
                 switch = True
                 if created == False:
                     gameWorld.createWorld()
+                    gameWorld.createPlayer()
                     created = True
 
     # Defines Mouse
@@ -147,5 +130,16 @@ while running:
         screen.blit(ply, ((width-280)/2, (height*2.25)/3))
 
     pygame.display.update()
+
+
+#Taylor
+clock = pygame.time.Clock()
+game = Game(screen)
+game.set_up()
+
+while game.game_state == GameState.RUNNING:
+    clock.tick(60)
+    game.update()
+    pygame.display.flip()
 
 pygame.quit()
