@@ -3,6 +3,9 @@ import pygame
 import spritesheet
 import random
 import gameWorld
+import config
+from game import Game
+from game_state import GameState
 
 pygame.init()
 
@@ -10,6 +13,11 @@ pygame.init()
 screen = pygame.display.set_mode([1920, 1080])
 
 pygame.display.set_caption('CloudScape Chronicles: Nimbus and Cirrus Edition')
+
+#Taylor
+clock = pygame.time.Clock()
+game = Game(screen)
+game.set_up()
 
 # Sprite Load
 grass = pygame.image.load('sprites/Tilesets/tiles/new/grass.png').convert_alpha()
@@ -111,6 +119,11 @@ while running:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             running = False
+
+        # Taylor
+        clock.tick(10)
+        game.update()
+        pygame.display.flip()
 
         # Checks if mouse is clicked
         if event.type == pygame.MOUSEBUTTONDOWN:
