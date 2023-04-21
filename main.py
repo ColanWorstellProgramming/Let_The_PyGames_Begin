@@ -2,11 +2,13 @@
 import pygame
 import spritesheet
 import random
+import gameWorld
 
 pygame.init()
 
 # Set up the drawing window
 screen = pygame.display.set_mode([1920, 1080])
+
 pygame.display.set_caption('CloudScape Chronicles: Nimbus and Cirrus Edition')
 
 # Sprite Load
@@ -93,7 +95,17 @@ screen.blit(hillsRight, (1880, -84))
 
 screen.blit(cloud3_4, (((width-140)/2), ((height*2.25)/3)-246))
 
+screen.blit(TitleTop, (32, 32))
+screen.blit(TitleBottom, (700, 32))
+
+#Update Display
+pygame.display.update()
+
 # Game Loop
+
+switch = False
+created = False
+
 running = True
 while running:
     for event in pygame.event.get():
@@ -104,23 +116,23 @@ while running:
         if event.type == pygame.MOUSEBUTTONDOWN:
 
             if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
-                pygame.QUIT()
+                switch = True
+                if created == False:
+                    gameWorld.createWorld()
+                    created = True
 
     # Defines Mouse
-    mouse = pygame.mouse.get_pos()
+    if switch == False:
+        mouse = pygame.mouse.get_pos()
 
-    if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
-        pygame.draw.rect(screen,Light_Button,[(width-260)/2, 810, 260, 170])
+        if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
+            pygame.draw.rect(screen,Light_Button,[(width-260)/2, 810, 260, 170])
 
-    else:
-        pygame.draw.rect(screen,Dark_Button,[(width-260)/2, 810, 260, 170])
+        else:
+            pygame.draw.rect(screen,Dark_Button,[(width-260)/2, 810, 260, 170])
 
-    screen.blit(ply, ((width-280)/2, (height*2.25)/3))
+        screen.blit(ply, ((width-280)/2, (height*2.25)/3))
 
-    screen.blit(TitleTop, (32, 32))
-    screen.blit(TitleBottom, (700, 32))
-
-    #Update Display
     pygame.display.update()
 
 pygame.quit()
