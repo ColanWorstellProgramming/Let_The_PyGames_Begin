@@ -5,11 +5,7 @@ from player import Player
 from game_state import GameState
 import spritesheet
 import gameWorld
-import random
-
-randX = random.uniform(0,1)
-randY = random.uniform(0,1)
-randI = random.uniform(0,1)
+from tiles import *
 
 class Game:
     def __init__(self, screen):
@@ -28,7 +24,12 @@ class Game:
         print("update")
         self.handle_events()
 
-        gameWorld.createWorld()
+        # gameWorld.createWorld()
+
+        # TileMap
+        map = TileMap('tiles/Map_Tile Layer 1.csv', spritesheet)
+        # Player.x_position,  Player.y_position = map.start_x, map.start_y
+        map.draw_map(self.screen)
 
         for object in self.object:
             object.render(self.screen)
