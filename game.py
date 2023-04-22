@@ -27,7 +27,7 @@ class Game:
         # gameWorld.createWorld()
 
         # TileMap
-        map = TileMap('tiles/Map_Tile Layer 1.csv', spritesheet)
+        map = TileMap('sprites/tiles/Map_Tile Layer 1.csv', spritesheet)
         # Player.x_position,  Player.y_position = map.start_x, map.start_y
         map.draw_map(self.screen)
 
