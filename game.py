@@ -26,6 +26,7 @@ class Game:
         print("update")
         self.handle_events()
 
+        gameWorld.createWorld()
         self.render_map(self.screen)
 
         for object in self.object:
