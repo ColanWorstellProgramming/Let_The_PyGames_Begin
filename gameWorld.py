@@ -11,7 +11,7 @@ rn2 = random.uniform(0,1)
 rn3 = random.uniform(0,1)
 
 def createPlayer():
-    player = Player(48, 48)
+    player = Player(32, 32)
     player.render(inGame)
 
 def createWorld():
@@ -22,7 +22,7 @@ def createWorld():
 
     inGame.blit(bg, (0, 0))
 
-    #Grass
+    #Grass - use only for slide show errors bloopers
 
     GrassSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
     GrassImg = spritesheet.SpriteSheet(GrassSprite)
