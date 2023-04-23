@@ -103,6 +103,33 @@ map_tile_image = {
     "c5" : pygame.transform.scale(pygame.image.load("sprites/Slices/grassHills/grasshills_40.png"), (60, 60)), # Bottom Strait (Left Top Corner Curve)
     "c6" : pygame.transform.scale(pygame.image.load("sprites/Slices/grassHills/grasshills_41.png"), (60, 60)), # Bottom Right Corner Curve
 
+    #Dirt Path
+    "P1" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_26.png"), (60, 60)), #Top Left Dirt Path
+    "P2" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_27.png"), (60, 60)), #Top Middle Dirt Path
+    "P3" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_28.png"), (60, 60)), #Top Right Dirt Path
+    "P4" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_34.png"), (60, 60)), #Middle Left Dirt Path
+    "P5" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_35.png"), (60, 60)), #Middle Middle Dirt Path
+    "P6" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_36.png"), (60, 60)), #Middle Right Dirt Path
+    "P7" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_42.png"), (60, 60)), #Bottom Left Dirt Path
+    "P8" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_43.png"), (60, 60)), #Bottom Middle Dirt Path
+    "P9" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_44.png"), (60, 60)), #Bottom Right Dirt Path
+    "p1" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_37.png"), (60, 60)), #Top Left Corner
+    "p2" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_38.png"), (60, 60)), #Top Right Corner
+    "p3" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_45.png"), (60, 60)), #Bottom Left Corner
+    "p4" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_46.png"), (60, 60)), #Bottom Right Corner
+
+    #Pathing
+    "L1" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_01.png"), (60, 60)), #Top Up To Down Path
+    "L2" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_05.png"), (60, 60)), #Mid Up To Down Path
+    "L3" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_09.png"), (60, 60)), #Bottom Up To Down Path
+    "L4" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_14.png"), (60, 60)), #Left Left To Right Path
+    "L5" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_15.png"), (60, 60)), #Mid Left To Right Path
+    "L6" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_16.png"), (60, 60)), #Right Left To Right Path
+    "L7" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_06.png"), (60, 60)), #Bottom To Right Path
+    "L8" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_07.png"), (60, 60)), #Bottom To Left Path
+    "L9" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_10.png"), (60, 60)), #Top To Right Path
+    "L0" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_11.png"), (60, 60)), #Top To Left Path
+
     # Collision
     #Fences
     "F1" : pygame.transform.scale(pygame.image.load("sprites/Slices/fence/fences_02.png"), (60, 60)), #Right Bottom Fence
@@ -177,6 +204,7 @@ map_tile_image = {
 
     #Doors
     "D1" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_04.png"), (60, 60)), #Gate Door
+    #Collision On For "D2 Only"
     "D2" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_11.png"), (60, 60)), #Closed Door
     "D3" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_18.png"), (60, 60)), #Open Door
     "D4" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_25.png"), (60, 60)), #Cracked Door
@@ -198,37 +226,10 @@ map_tile_image = {
     "r4" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_20.png"), (60, 60)), #Mid Mid
     "r5" : pygame.transform.scale(pygame.image.load("sprites/Slices/house/house_27.png"), (60, 60)), #Mid Bottom
 
-    #Dirt Path
-    "P1" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_26.png"), (60, 60)), #Top Left Dirt Path
-    "P2" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_27.png"), (60, 60)), #Top Middle Dirt Path
-    "P3" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_28.png"), (60, 60)), #Top Right Dirt Path
-    "P4" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_34.png"), (60, 60)), #Middle Left Dirt Path
-    "P5" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_35.png"), (60, 60)), #Middle Middle Dirt Path
-    "P6" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_36.png"), (60, 60)), #Middle Right Dirt Path
-    "P7" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_42.png"), (60, 60)), #Bottom Left Dirt Path
-    "P8" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_43.png"), (60, 60)), #Bottom Middle Dirt Path
-    "P9" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_44.png"), (60, 60)), #Bottom Right Dirt Path
-    "p1" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_37.png"), (60, 60)), #Top Left Corner
-    "p2" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_38.png"), (60, 60)), #Top Right Corner
-    "p3" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_45.png"), (60, 60)), #Bottom Left Corner
-    "p4" : pygame.transform.scale(pygame.image.load("sprites/Slices/dirt/dirt_46.png"), (60, 60)), #Bottom Right Corner
-
     #Water
     "W1" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_01.png"), (60, 60)), #Far Left Water
     "W2" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_02.png"), (60, 60)), #Left Water
     "W3" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_03.png"), (60, 60)), #Right Water
     "W4" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_04.png"), (60, 60)), #Far Right Water
-
-    #Pathing
-    "L1" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_01.png"), (60, 60)), #Top Up To Down Path
-    "L2" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_05.png"), (60, 60)), #Mid Up To Down Path
-    "L3" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_09.png"), (60, 60)), #Bottom Up To Down Path
-    "L4" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_14.png"), (60, 60)), #Left Left To Right Path
-    "L5" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_15.png"), (60, 60)), #Mid Left To Right Path
-    "L6" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_16.png"), (60, 60)), #Right Left To Right Path
-    "L7" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_06.png"), (60, 60)), #Bottom To Right Path
-    "L8" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_07.png"), (60, 60)), #Bottom To Left Path
-    "L9" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_10.png"), (60, 60)), #Top To Right Path
-    "L0" : pygame.transform.scale(pygame.image.load("sprites/Slices/path/Paths_11.png"), (60, 60)), #Top To Left Path
 
 }
