@@ -28,8 +28,6 @@ class Game:
 
         self.render_map(self.screen)
 
-        # gameWorld.createWorld()
-
         for object in self.object:
             object.render(self.screen)
 
@@ -60,6 +58,7 @@ class Game:
             for line in map_file:
                 tiles = []
                 for i in range(0, len(line) - 1, 2):
+                    print(line[i])
                     tiles.append(line[i])
                 self.map.append(tiles)
 
@@ -76,13 +75,18 @@ class Game:
 
 map_tile_image = {
     # Non - Collision
-    "G" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/grassHills/grasshills_13.png"), (60, 60)), # Plain Grass
+    "G1" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/grassHills/grasshills_13.png"), (60, 60)), # Plain Grass
 
     # Collision
-    "D" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_15.png"), (60, 60)), #Left To Right Fence
-    "Z" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_02.png"), (60, 60)), #Top Left Fence
-    "W" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_04.png"), (60, 60)), #Top Right Fence
-    "X" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_12.png"), (60, 60)), #Bottom Right Fence
-    "Y" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_10.png"), (60, 60)), #Bottom Left Fence
-    "V" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_05.png"), (60, 60)), #Up To Down Fence
+    "F1" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_02.png"), (60, 60)), #Top Left Fence
+    "F2" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_04.png"), (60, 60)), #Top Right Fence
+    "F3" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_10.png"), (60, 60)), #Bottom Left Fence
+    "F4" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_12.png"), (60, 60)), #Bottom Right Fence
+    "F5" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_15.png"), (60, 60)), #Left To Right Fence
+    "F6" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/fence/fences_05.png"), (60, 60)), #Up To Down Fence
+    "A1" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/trees/trees_02.png"), (60, 60)), #Top Left Tree
+    "A2" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/trees/trees_03.png"), (60, 60)), #Top Right Tree
+    "A3" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/trees/trees_13.png"), (60, 60)), #Bottom Left Tree
+    "A4" : pygame.transform.scale(pygame.image.load("sprites/Slices/images/trees/trees_12.png"), (60, 60)) #Bottom Right Tree
+
 }
