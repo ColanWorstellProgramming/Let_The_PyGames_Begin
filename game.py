@@ -56,11 +56,8 @@ class Game:
     def load_map(self, file_name):
         with open(file_name) as map_file:
             for line in map_file:
-                tiles = []
-                for i in range(0, len(line) - 1, 2):
-                    print(line[i])
-                    tiles.append(line[i])
-                self.map.append(tiles)
+                bytcodes = line.split()
+                self.map.append(bytcodes)
 
     def render_map(self, screen):
         y_pos = 0
