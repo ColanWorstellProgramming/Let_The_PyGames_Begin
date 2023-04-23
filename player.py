@@ -19,7 +19,7 @@ class Player:
     def render(self, screen):
         screen.blit(self.image, self.rect)
 
-    def update_position(self, x_change, y_change):
-        self.position[0] += x_change
-        self.position[1] += y_change
+    def update_position(self, new_position):
+        self.position[0] = new_position[0]
+        self.position[1] = new_position[1]
         self.rect = pygame.Rect(self.position[0] * config.SCALE, self.position[1] * config.SCALE, config.SCALE, config.SCALE)

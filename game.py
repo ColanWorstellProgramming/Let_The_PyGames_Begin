@@ -5,6 +5,7 @@ from player import Player
 from game_state import GameState
 import spritesheet
 import gameWorld
+from passable import Passable, impassable
 
 class Game:
     def __init__(self, screen):
@@ -25,7 +26,6 @@ class Game:
     def update(self):
         print("update")
         self.handle_events()
-
         gameWorld.createWorld()
         self.render_map(self.screen)
 
@@ -33,26 +33,27 @@ class Game:
             object.render(self.screen)
 
     def handle_events(self):
-        movement = 0.2
+        movement = 5
         x=0
         y=0
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                      pygame.quit()
-                keys = pygame.key.get_pressed()
-
-                if keys[pygame.K_w]:
-                    y -= movement
-                    self.player.update_position(x, y)
-                if keys[pygame.K_s]:
-                    y += movement
-                    self.player.update_position(x, y)
-                if keys[pygame.K_a]:
-                    x -= movement
-                    self.player.update_position(x, y)
-                if keys[pygame.K_d]:
-                    x += movement
-                    self.player.update_position(x, y)
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_ESCAPE:
+                        pygame.quit()
+                    elif event.key == pygame.K_w:
+                        y -= movement
+                        self.move_unit(self.player, [x, y])
+                    elif event.key == pygame.K_s:
+                        y += movement
+                        self.move_unit(self.player, [x, y])
+                    elif event.key == pygame.K_a:
+                        x -= movement
+                        self.move_unit(self.player, [x, y])
+                    elif event.key == pygame.K_w:
+                        x += movement
+                        self.move_unit(self.player, [x, y])
 
     def load_map(self, file_name):
         with open(file_name) as map_file:
@@ -70,6 +71,26 @@ class Game:
                 screen.blit(image, rect)
                 x_pos += 1
             y_pos += 1
+
+    def move_unit(self, unit, position_change):
+        new_position = [unit.position[0] + position_change[0], unit.position[1] + position_change[1]]
+        #print(unit.position)
+        #print(new_position[0])
+        #print(new_position[1])
+        #print(self.map(new_position[0]))
+        #if self.map[new_position] not in Passable:
+           # return 
+        #print(new_position[1])  
+        #print(len(self.map))
+        if new_position[0] < 0 or new_position[0] > 180:
+            return 
+        if new_position[1] < 0 or new_position[1] > 90:
+            return
+        #print(new_position[0])
+        if (self.map[int(new_position[0] / 10)] [int(new_position[1] / 5)]) not in Passable:
+            return
+        unit.update_position(new_position)
+
 
 map_tile_image = {
     # Non - Collision
