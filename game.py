@@ -113,7 +113,7 @@ class Game:
                     if (random.randrange(30) >= 29 and tile not in Path and tile not in Interactive):
                         #Event's ###############################################################################
                         print("Event Triggered")
-                        #self.setFlip(2)
+                        self.setFlip(2)
                 x_pos += 1
             y_pos += 1
 
