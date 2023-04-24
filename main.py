@@ -114,7 +114,6 @@ while switch == False:
                 switch = True
                 if created == False:
                     gameWorld.createWorld()
-                    gameWorld.createPlayer()
                     created = True
 
     # Defines Mouse
@@ -138,8 +137,10 @@ game = Game(screen)
 game.set_up()
 
 while game.game_state == GameState.RUNNING:
+
     clock.tick(60)
     game.update()
     pygame.display.flip()
+    pygame.display.update()
 
 pygame.quit()

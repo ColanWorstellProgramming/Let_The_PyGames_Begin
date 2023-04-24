@@ -13,6 +13,17 @@ Passable = [   #Grass
     "G9",  # Bottom Right
     "G0",  # Grown Grass
 
+    "g1",  # Plain Grass
+    "g2",  # Top Left
+    "g3",  # Top Middle
+    "g4",  # Top Right
+    "g5",  # Left Middle
+    "g6",  # Right Middle
+    "g7",  # Bottom Left
+    "g8",  # Bottom Middle
+    "g9",  # Bottom Right
+    "g0",  # Grown Grass
+
     #Grass Corners
     "C1",  # Top Left Corner Curve
     "C2",  # Top Strait (Right Bottom Corner Curve)
@@ -45,6 +56,21 @@ Passable = [   #Grass
     "p2",
     "p3",
     "p4",
+
+    #Dirt Path
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6",
+    "U7",
+    "U8",
+    "U9",
+    "u1",
+    "u2",
+    "u3",
+    "u4",
 
     #Pathing
     "L1",
@@ -156,5 +182,46 @@ impassable = [
     "W3",
     "W4"
 ]
-print(Passable)
-print(impassable)
+Path = [   #Path
+
+    #Pathing
+    "L1",
+    "L2",
+    "L3",
+    "L4",
+    "L5",
+    "L6",
+    "L7",
+    "L8",
+    "L9",
+    "L0"
+]
+Interactive = [   #Interactive
+
+    "g1",  # Plain Grass
+    "g2",  # Top Left
+    "g3",  # Top Middle
+    "g4",  # Top Right
+    "g5",  # Left Middle
+    "g6",  # Right Middle
+    "g7",  # Bottom Left
+    "g8",  # Bottom Middle
+    "g9",  # Bottom Right
+    "g0",  # Grown Grass
+
+    #Dirt Path
+    "U1",
+    "U2",
+    "U3",
+    "U4",
+    "U5",
+    "U6",
+    "U7",
+    "U8",
+    "U9",
+    "u1",
+    "u2",
+    "u3",
+    "u4",
+
+]
