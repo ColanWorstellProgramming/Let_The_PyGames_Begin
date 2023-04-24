@@ -37,11 +37,11 @@ def createFight():
     inGame.blit(GrassTexture, (448, 600))
     inGame.blit(GrassTexture, (1280, 600))
 
-    cloudModel3_4 = pygame.image.load('sprites/PNG/Clouds_white/Shape3/cloud4.png').convert_alpha()
+    cloudModel3_4 = pygame.image.load('sprites/Characters/Cloud.png').convert_alpha()
     cloud3_4Sheet = spritesheet.SpriteSheet(cloudModel3_4)
-    cloud3_4 = cloud3_4Sheet.get_image(72, 51, 0, 0, 1.4, 1.4, (0, 0, 0))
+    cloud3_4 = cloud3_4Sheet.get_image(47, 30, 0, 0, 2.8, 2.8, (0, 0, 0))
 
-    inGame.blit(cloud3_4, (1325, 640))
+    inGame.blit(cloud3_4, (1310, 645))
 
     char = pygame.image.load('sprites/Characters/char.png').convert_alpha()
     charSheet = spritesheet.SpriteSheet(char)

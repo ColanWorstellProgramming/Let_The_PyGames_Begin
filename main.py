@@ -18,7 +18,7 @@ pygame.display.set_caption('CloudScape Chronicles: Nimbus and Cirrus Edition')
 grass = pygame.image.load('sprites/Tilesets/tiles/new/grass.png').convert_alpha()
 play = pygame.image.load('sprites/play.png').convert_alpha()
 char = pygame.image.load('sprites/Characters/char.png').convert_alpha()
-cloudModel3_4 = pygame.image.load('sprites/PNG/Clouds_white/Shape3/cloud4.png').convert_alpha()
+cloudModel3_4 = pygame.image.load('sprites/Characters/Cloud.png').convert_alpha()
 HillsSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
 GrassSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
 TitleSprite = pygame.image.load('sprites/title.png').convert_alpha()
@@ -47,7 +47,7 @@ height = screen.get_height()
 # Width of IMG, Hight of IMG, Starting Pixel X, Starting Pixel Y, Scale X, Scale Y, Background Color To Remove, Frame
 bg = grassSheet.get_image(16, 16, 16, 16, 120, 67.5, Black)
 bunny = charSheet.get_image(48, 48, 0, 0, 4, 4, Black)
-cloud3_4 = cloud3_4Sheet.get_image(72, 51, 0, 0, 2, 2, Black)
+cloud3_4 = cloud3_4Sheet.get_image(47, 30, 0, 0, 3, 3, Black)
 ply = playButton.get_image(28, 18, 0, 0, 10, 10, Black)
 hills = HillsImg.get_image(47, 47, 0, 0, 6, 6, Black)
 hillsLeft = HillsImg.get_image(47/3, 47, 0, 0, 6, 6, Black)
@@ -96,7 +96,7 @@ while i < 20:
 
 screen.blit(hillsRight, (1880, -84))
 
-screen.blit(cloud3_4, (((width-140)/2), ((height*2.25)/3)-246))
+screen.blit(cloud3_4, (1700, 32))
 
 screen.blit(TitleTop, (32, 32))
 screen.blit(TitleBottom, (700, 32))
