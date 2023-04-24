@@ -16,7 +16,7 @@ class Game:
 
     def set_up(self):
         print("do set up")
-        player = Player(25, 52)
+        player = Player(250, 540)
         self.player = player
         self.object.append(player)
         self.game_state = GameState.RUNNING
@@ -24,7 +24,7 @@ class Game:
         self.load_map('maps/map1.txt')
 
     def update(self):
-        print("update")
+        # print("update")
         self.handle_events()
         gameWorld.createWorld()
         self.render_map(self.screen)
@@ -33,7 +33,7 @@ class Game:
             object.render(self.screen)
 
     def handle_events(self):
-        movement = 5
+        movement = 60
         x=0
         y=0
         for event in pygame.event.get():
@@ -51,7 +51,7 @@ class Game:
                     elif event.key == pygame.K_a:
                         x -= movement
                         self.move_unit(self.player, [x, y])
-                    elif event.key == pygame.K_w:
+                    elif event.key == pygame.K_d:
                         x += movement
                         self.move_unit(self.player, [x, y])
 
@@ -74,22 +74,25 @@ class Game:
 
     def move_unit(self, unit, position_change):
         new_position = [unit.position[0] + position_change[0], unit.position[1] + position_change[1]]
-        #print(unit.position)
-        #print(new_position[0])
-        #print(new_position[1])
-        #print(self.map(new_position[0]))
-        #if self.map[new_position] not in Passable:
-           # return 
-        #print(new_position[1])  
-        #print(len(self.map))
-        if new_position[0] < 0 or new_position[0] > 180:
-            return 
-        if new_position[1] < 0 or new_position[1] > 90:
-            return
-        #print(new_position[0])
-        if (self.map[int(new_position[0] / 10)] [int(new_position[1] / 5)]) not in Passable:
-            return
-        unit.update_position(new_position)
+
+        new_X = (int(new_position[0] + 50) / 60)
+        new_Y = (int(new_position[1]  + 60 )/ 60)
+
+        print(new_X)
+        print(new_Y)
+
+        y_pos = 0
+        for line in self.map:
+            x_pos = 0
+            for tile in line:
+                if (tile in Passable and x_pos == new_X and y_pos == new_Y):
+                    unit.update_position(new_position)
+                x_pos += 1
+            y_pos += 1
+
+        #if (self.map[int((new_position[0] + 50) / 60)] [int((new_position[1] + 60) / 60)]) not in Passable:
+        #    return
+        #unit.update_position(new_position)
 
 
 map_tile_image = {

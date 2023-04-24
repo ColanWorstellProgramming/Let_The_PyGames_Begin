@@ -11,7 +11,7 @@ class Player:
         self.image = pygame.image.load('sprites/Characters/bunny.png')
         self.image = pygame.transform.scale(self.image, (160, 160))
         self.image.set_colorkey((255, 255, 255))
-        self.rect = pygame.Rect(self.position[0] * config.SCALE, self.position[1] * config.SCALE, config.SCALE, config.SCALE)
+        self.rect = pygame.Rect(self.position[0], self.position[1], 1, 1)
 
     def update(self):
         print("player updated")
@@ -22,4 +22,4 @@ class Player:
     def update_position(self, new_position):
         self.position[0] = new_position[0]
         self.position[1] = new_position[1]
-        self.rect = pygame.Rect(self.position[0] * config.SCALE, self.position[1] * config.SCALE, config.SCALE, config.SCALE)
+        self.rect = pygame.Rect(self.position[0], self.position[1], 1, 1)
