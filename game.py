@@ -51,7 +51,9 @@ class Game:
 
             self.setFlip(-1)
 
+            #Start The Fight
             gameWorld.createFight()
+            gameWorld.fightLogic()
 
     def handle_events(self):
         movement = 60

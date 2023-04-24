@@ -49,3 +49,7 @@ def createFight():
 
     inGame.blit(bunny, (448, 580))
     pygame.display.update()
+
+#Fight Logic
+def fightLogic():
+    print("Fight Logic")
