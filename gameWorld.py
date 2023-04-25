@@ -129,12 +129,21 @@ def fightLogic(theGame):
 
     #Fight Button Logic
 
+    #Cloud Speak
+    bgBattle = pygame.image.load('sprites/battle/bgBattle.png').convert_alpha()
+    bgBattleSheet = spritesheet.SpriteSheet(bgBattle)
+    bgBattlePaste = bgBattleSheet.get_image(48, 20, 0, 0, 10, 7, (0, 0, 0))
+
+    #Font
+    font = pygame.font.Font('freesansbold.ttf', 32)
+
     # Hard Code Logic
 
     cloudHealth = 10
     cloudAttack = [2, 3, 4]
 
-    playerHealth = 20
+    playerHealth = 40
+    playerMaxHealth = 40
     playerAttack = 6
     playerPanic = 1
     playerConstruct = 2
@@ -149,27 +158,74 @@ def fightLogic(theGame):
             theGame.setFlap(1)
             fighting = False
 
-        if playerHealth <= 0:
-            #Death
-            print('Death')
-
         for event in pygame.event.get():
             if ( event.type == pygame.QUIT ):
                 done = True
             if event.type == pygame.MOUSEBUTTONDOWN:
+
+                hit = cloudAttack[random.randrange(0, 2)]
+
                 if 504 <= mouse[0] <= 814 and 804 <= mouse[1] <= 854: # Attack
                     cloudHealth = cloudHealth - playerAttack
+
+                    #Cloud Fight Back
+                    playerHealth = playerHealth - hit
+
+                    #Cloud Speak
+                    text = font.render('That was very effective!', True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (1130, 400))
+                    inGame.blit(text, (1170, 450))
+
+                    #Bunny Speak
+                    text = font.render('Ouch! I have {} Health Left!'.format(playerHealth), True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (400, 400))
+                    inGame.blit(text, (420, 450))
+
                 if 901 <= mouse[0] <= 1040 and 804 <= mouse[1] <= 852: # Run
                     theGame.setFlip(1)
                     theGame.setFlap(1)
+                    playerRun = True
                     fighting = False
+
                 if 1185 <= mouse[0] <= 1396 and 804 <= mouse[1] <= 854: # Panic
+                    #Cloud Taking Damage
                     cloudHealth = cloudHealth - playerPanic
+
+                    #Cloud Fight Back
+                    playerHealth = playerHealth - hit
+
+                    #Cloud Speak
+                    text = font.render("Not very effective..", True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (1130, 400))
+                    inGame.blit(text, (1170, 450))
+
+                    #Bunny Speak
+                    text = font.render('Ouch! I have {} Health Left!'.format(playerHealth), True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (400, 400))
+                    inGame.blit(text, (420, 450))
+
                 if 676 <= mouse[0] <= 1286 and 894 <= mouse[1] <= 1014: # Construct
+                    #Cloud Taking Damage
                     cloudHealth = cloudHealth - playerConstruct
 
-                #Cloud Fight Back
-                playerHealth = playerHealth - cloudAttack[random.randrange(0, 2)]
+                    #Cloud Speak
+                    text = font.render("Hurts just a little :')", True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (1130, 400))
+                    inGame.blit(text, (1170, 450))
+
+                    #Cloud Fight Back
+                    playerHealth = playerHealth - cloudAttack[random.randrange(0, 2)]
+
+                    #Bunny Speak
+                    text = font.render('Ouch! I have {} Health Left!'.format(playerHealth), True, (0, 0, 0))
+
+                    inGame.blit(bgBattlePaste, (400, 400))
+                    inGame.blit(text, (420, 450))
 
         mouse = pygame.mouse.get_pos()
 
