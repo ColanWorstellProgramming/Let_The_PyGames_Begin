@@ -189,7 +189,7 @@ def fightLogic(theGame):
                     playerRun = True
                     fighting = False
 
-                if 1185 <= mouse[0] <= 1396 and 804 <= mouse[1] <= 854: # Panic
+                if 1178 <= mouse[0] <= 1396 and 804 <= mouse[1] <= 854: # Panic
                     #Cloud Taking Damage
                     cloudHealth = cloudHealth - playerPanic
 
@@ -248,7 +248,7 @@ def fightLogic(theGame):
             inGame.blit(runText2, (898, 824))
 
         #Panic
-        if 1185 <= mouse[0] <= 1396 and 804 <= mouse[1] <= 854:
+        if 1178 <= mouse[0] <= 1396 and 804 <= mouse[1] <= 854:
             #Panic Logic
 
             #Print Backdrop
