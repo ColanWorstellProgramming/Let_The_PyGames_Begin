@@ -3,9 +3,10 @@ import pygame
 from player import Player
 from game_state import GameState
 import gameWorld
-from passable import Passable, impassable, Path, Interactive
-import random, math
+from passable import Passable, Path, Interactive
+import random
 import config
+
 class Game:
     def __init__(self, screen):
         self.screen = screen
@@ -17,7 +18,6 @@ class Game:
         self.flap = 0
 
     def set_up(self):
-        print("do set up")
         player = Player(250, 540)
         self.player = player
         self.object.append(player)
@@ -28,11 +28,21 @@ class Game:
     def update(self):
 
         if self.getFlap() == 0:
-            player = Player(32 * config.SCALE, 32 * config.SCALE)
-            player.render(self.screen, self.camera)
+            self.player.render(self.screen, self.camera)
             self.setFlap(1)
 
         if self.getFlip() == 1:
+
+            if self.getFlap() == 1:
+                fade = pygame.Surface((1920, 1080))
+                fade.fill((0,0,0))
+                for alpha in range(0, 100):
+                    fade.set_alpha(alpha)
+                    self.screen.blit(fade, (0,0))
+                    pygame.display.update()
+
+                self.setFlap(2)
+
             self.handle_events()
             gameWorld.createWorld()
             self.render_map(self.screen)
@@ -53,7 +63,7 @@ class Game:
 
             #Start The Fight
             gameWorld.createFight()
-            gameWorld.fightLogic()
+            gameWorld.fightLogic(self)
 
     def handle_events(self):
         movement = 60
@@ -103,18 +113,13 @@ class Game:
         new_X = (int(new_position[0] + 50)  * config.SCALE / (60 * config.SCALE))
         new_Y = (int(new_position[1] + 60)  * config.SCALE / (60 * config.SCALE))
 
-        print(new_X)
-        print(new_Y)
-
         y_pos = 0
         for line in self.map:
             x_pos = 0
             for tile in line:
                 if (tile in Passable and x_pos == new_X and y_pos == new_Y):
                     unit.update_position(new_position)
-                    if (random.randrange(30) >= 29 and tile not in Path and tile not in Interactive):
-                        #Event's ###############################################################################
-                        print("Event Triggered")
+                    if (random.randrange(30) >= 28 and tile not in Path and tile not in Interactive):
                         self.setFlip(2)
                 x_pos += 1
             y_pos += 1

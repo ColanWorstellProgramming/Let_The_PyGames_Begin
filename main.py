@@ -2,7 +2,6 @@
 import pygame
 import spritesheet
 import random
-import gameWorld
 import config
 from game import Game
 from game_state import GameState
@@ -113,7 +112,17 @@ while switch == False:
             if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
                 switch = True
                 if created == False:
-                    gameWorld.createWorld()
+                    #Taylor
+                    clock = pygame.time.Clock()
+                    game = Game(screen)
+                    game.set_up()
+
+                    while game.game_state == GameState.RUNNING:
+
+                        clock.tick(60)
+                        game.update()
+                        pygame.display.flip()
+                        pygame.display.update()
                     created = True
 
     # Defines Mouse
@@ -128,19 +137,6 @@ while switch == False:
 
         screen.blit(ply, ((width-280)/2, (height*2.25)/3))
 
-    pygame.display.update()
-
-
-#Taylor
-clock = pygame.time.Clock()
-game = Game(screen)
-game.set_up()
-
-while game.game_state == GameState.RUNNING:
-
-    clock.tick(60)
-    game.update()
-    pygame.display.flip()
     pygame.display.update()
 
 pygame.quit()
