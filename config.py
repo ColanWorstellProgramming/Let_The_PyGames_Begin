@@ -11,4 +11,6 @@ HEIGHT = 1080
 
 TITLE = 'CloudScape Chronicles: Nimbus and Cirrus Edition'
 
+CLOCK = 60
+
 SCALE = 2

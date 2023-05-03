@@ -38,7 +38,7 @@ class PyGame:
         while switch == False:
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
-                    if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
+                    if 822 <= mouse[0] <= 1082 and 780 <= mouse[1] <= 952:
                         switch = True
                         if created == False:
                             #Taylor
@@ -48,7 +48,7 @@ class PyGame:
 
                             while game.game_state == GameState.RUNNING:
 
-                                clock.tick(60)
+                                clock.tick(config.CLOCK)
                                 game.update()
                                 pygame.display.flip()
                                 pygame.display.update()
@@ -58,7 +58,7 @@ class PyGame:
             if switch == False:
                 mouse = pygame.mouse.get_pos()
 
-                if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
+                if 822 <= mouse[0] <= 1082 and 780 <= mouse[1] <= 952:
                     pygame.draw.rect(screen,config.LIGHT,[(config.WIDTH-260)/2, 810, 260, 170])
 
                 else:
