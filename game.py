@@ -1,11 +1,12 @@
 #!/usr/bin/python3
-import pygame
-from player import Player
+import pygame, random, config
+import gameWorld, character
 from game_state import GameState
-import gameWorld
-from passable import Passable, Path, Interactive
-import random
-import config
+from player import Player
+from passable import *
+
+
+## -------------------------------- Game Class
 
 class Game:
     def __init__(self, screen):
@@ -16,6 +17,9 @@ class Game:
         self.camera = [0, 0]
         self.flip = 1
         self.flap = 0
+        self.gw = gameWorld.GameWorld()
+        self.char = character.char()
+        self.Zone = 0
 
     def set_up(self):
         player = Player(250, 540)
@@ -34,39 +38,24 @@ class Game:
         if self.getFlip() == 1:
 
             if self.getFlap() == 1:
-                fade = pygame.Surface((1920, 1080))
-                fade.fill((0,0,0))
-                for alpha in range(0, 100):
-                    fade.set_alpha(alpha)
-                    self.screen.blit(fade, (0,0))
-                    pygame.display.update()
-
+                self.imFaded()
                 self.setFlap(2)
 
             self.handle_events()
-            gameWorld.createWorld()
+            self.gw.createWorldLayer0()
             self.render_map(self.screen)
 
             for object in self.object:
                 object.render(self.screen, self.camera)
 
         if self.getFlip() == 2:
-
-            fade = pygame.Surface((1920, 1080))
-            fade.fill((0,0,0))
-            for alpha in range(0, 100):
-                fade.set_alpha(alpha)
-                self.screen.blit(fade, (0,0))
-                pygame.display.update()
-
+            self.imFaded()
             self.setFlip(-1)
 
-            #Start The Fight
-            gameWorld.createFight()
-            gameWorld.fightLogic(self)
+            self.gw.createFightScene(self, self.char, self.getZone())
 
     def handle_events(self):
-        movement = 60
+        config.MOVEMENT_SPEED = 60
         x=0
         y=0
         for event in pygame.event.get():
@@ -76,16 +65,16 @@ class Game:
                     if event.key == pygame.K_ESCAPE:
                         pygame.quit()
                     elif event.key == pygame.K_w:
-                        y -= movement
+                        y -= config.MOVEMENT_SPEED
                         self.move_unit(self.player, [x, y])
                     elif event.key == pygame.K_s:
-                        y += movement
+                        y += config.MOVEMENT_SPEED
                         self.move_unit(self.player, [x, y])
                     elif event.key == pygame.K_a:
-                        x -= movement
+                        x -= config.MOVEMENT_SPEED
                         self.move_unit(self.player, [x, y])
                     elif event.key == pygame.K_d:
-                        x += movement
+                        x += config.MOVEMENT_SPEED
                         self.move_unit(self.player, [x, y])
 
     def load_map(self, file_name):
@@ -161,7 +150,25 @@ class Game:
     def setFlap(self, x):
         self.flap = x
 
+    def getZone(self):
+        return self.Zone
+
+    def setZone(self, x):
+        self.Zone = x
+
+    def imFaded(self):
+        if config.FADED == 0: ## -------------> Development Tool (Check Config)
+            fade = pygame.Surface((config.WIDTH, config.HEIGHT))
+            fade.fill(config.BLACK)
+            for alpha in range(0, 100):
+                fade.set_alpha(alpha)
+                self.screen.blit(fade, (0,0))
+                pygame.display.update()
+
+## -------------------------------- Tile Map Dictonary
+
 map_tile_image = {
+
     # Non - Collision
     #Grass Non Interactive
     "G1" : pygame.transform.scale(pygame.image.load("sprites/Slices/grassHills/grasshills_13.png"), (60 * config.SCALE, 60 * config.SCALE)), # Plain Grass
@@ -348,5 +355,4 @@ map_tile_image = {
     "W2" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_02.png"), (60 * config.SCALE, 60 * config.SCALE)), #Left Water
     "W3" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_03.png"), (60 * config.SCALE, 60 * config.SCALE)), #Right Water
     "W4" : pygame.transform.scale(pygame.image.load("sprites/Slices/water/Water_04.png"), (60 * config.SCALE, 60 * config.SCALE)), #Far Right Water
-
 }
