@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-import pygame
+import pygame, random, config
 import spritesheet
-import random
-import config
-from game import Game
 from game_state import GameState
+from game import Game
 
 
 ## -------------------------------- Pygame Init Class
