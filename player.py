@@ -23,4 +23,3 @@ class Player:
     def render(self, screen, camera):
         self.rect = pygame.Rect(self.position[0] * config.SCALE - (camera[0] * 60 * config.SCALE), self.position[1] * config.SCALE - (camera[1] * 60 * config.SCALE), config.SCALE, config.SCALE)
         screen.blit(self.image, self.rect)
-

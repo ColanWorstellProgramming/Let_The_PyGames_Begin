@@ -6,137 +6,151 @@ import config
 from game import Game
 from game_state import GameState
 
-pygame.init()
 
-# Set up the drawing window
-screen = pygame.display.set_mode([1920, 1080])
+## -------------------------------- Pygame Init Class
 
-pygame.display.set_caption('CloudScape Chronicles: Nimbus and Cirrus Edition')
+class PyGame:
+    def __init__(self):
+        self.width = config.WIDTH
+        self.height = config.HEIGHT
+        self.title = config.TITLE
+        self.screen = pygame.display.set_mode([self.width, self.height])
 
-# Sprite Load
-grass = pygame.image.load('sprites/Tilesets/tiles/new/grass.png').convert_alpha()
-play = pygame.image.load('sprites/play.png').convert_alpha()
-char = pygame.image.load('sprites/Characters/char.png').convert_alpha()
-cloudModel3_4 = pygame.image.load('sprites/Characters/Cloud.png').convert_alpha()
-HillsSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
-GrassSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
-TitleSprite = pygame.image.load('sprites/title.png').convert_alpha()
+    def run(self):
+        pygame.init()
 
-# Import
-grassSheet = spritesheet.SpriteSheet(grass)
-charSheet = spritesheet.SpriteSheet(char)
-cloud3_4Sheet = spritesheet.SpriteSheet(cloudModel3_4)
-playButton = spritesheet.SpriteSheet(play)
-HillsImg = spritesheet.SpriteSheet(HillsSprite)
-GrassImg = spritesheet.SpriteSheet(GrassSprite)
-TitleImg = spritesheet.SpriteSheet(TitleSprite)
+        pygame.display.set_caption(self.title)
 
-# Colors
-Black = (0, 0, 0)
-White = (255, 255, 255)
-Light_Button = (170,170,170)
-Dark_Button = (100,100,100)
+        mainMenu.buildMenu(self, self.getScreen())
+        pygame.display.update()
 
-# Window Width
-width = screen.get_width()
+        self.gameLoop(self.getScreen())
 
-# Window Hight
-height = screen.get_height()
+    def gameLoop(self, screen):
 
-# Width of IMG, Hight of IMG, Starting Pixel X, Starting Pixel Y, Scale X, Scale Y, Background Color To Remove, Frame
-bg = grassSheet.get_image(16, 16, 16, 16, 120, 67.5, Black)
-bunny = charSheet.get_image(48, 48, 0, 0, 4, 4, Black)
-cloud3_4 = cloud3_4Sheet.get_image(47, 30, 0, 0, 3, 3, Black)
-ply = playButton.get_image(28, 18, 0, 0, 10, 10, Black)
-hills = HillsImg.get_image(47, 47, 0, 0, 6, 6, Black)
-hillsLeft = HillsImg.get_image(47/3, 47, 0, 0, 6, 6, Black)
-hillsMid = HillsImg.get_image(47/3, 47, 47/3, 0, 6, 6, Black)
-hillsRight = HillsImg.get_image(47/3, 47, ((50*2)/3), 0, 6, 6, Black)
-GrassTexture = GrassImg.get_image(16, 16, 0, 80, 4, 4, Black)
-TitleTop = TitleImg.get_image(59, 7, 23, 17, 10, 10, White)
-TitleBottom = TitleImg.get_image(59, 7, 23, 25, 10, 10, White)
+        play = pygame.image.load('sprites/play.png').convert_alpha()
+        playButton = spritesheet.SpriteSheet(play)
+        ply = playButton.get_image(28, 18, 0, 0, 10, 10, config.BLACK)
 
-# Screen Background
-screen.fill((240, 226, 187))
+        switch = False
+        created = False
 
-#Sprites
+        while switch == False:
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
+                        switch = True
+                        if created == False:
+                            #Taylor
+                            clock = pygame.time.Clock()
+                            game = Game(screen)
+                            game.set_up()
 
-#Background
-screen.blit(bg, (0, 0))
+                            while game.game_state == GameState.RUNNING:
 
-#Grass
-j = 1
-y = 1
-for j in range (900):
-    for y in range (30):
-        if j % 3 == 0 and y % 2 == 0 and random.uniform(0,1) >= 0.3:
-            screen.blit(GrassTexture, (j * (64 * random.uniform(0,1)), y * (64 * random.uniform(0,1))))
-        y += 1
-    j += 1
+                                clock.tick(60)
+                                game.update()
+                                pygame.display.flip()
+                                pygame.display.update()
+                            created = True
 
-screen.blit(bunny, (((width-192)/2), ((height*2.25)/3)-146))
-screen.blit(hillsLeft, (-32, -84))
+            # Defines Mouse
+            if switch == False:
+                mouse = pygame.mouse.get_pos()
 
-# Length Hills
-screen.blit(hillsMid, (1800, -84))
+                if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
+                    pygame.draw.rect(screen,config.LIGHT,[(config.WIDTH-260)/2, 810, 260, 170])
 
-i = 0
-while i < 19:
-    screen.blit(hillsMid, (94 * i, 32))
-    i += 1
+                else:
+                    pygame.draw.rect(screen,config.DARK,[(config.WIDTH-260)/2, 810, 260, 170])
 
-screen.blit(hillsRight, (1780, 32))
+                screen.blit(ply, ((config.WIDTH-280)/2, (config.HEIGHT*2.25)/3))
 
-i = 0
-x = 1
-while i < 20:
-    screen.blit(hillsMid, (94 * i, -84))
-    i += 1
+            pygame.display.update()
 
-screen.blit(hillsRight, (1880, -84))
+    def getScreen(self):
+        return self.screen
 
-screen.blit(cloud3_4, (1700, 32))
+    def setScreen(self, x):
+        self.screen = x
 
-screen.blit(TitleTop, (32, 32))
-screen.blit(TitleBottom, (700, 32))
+## -------------------------------- Build Main Menu Class
 
-#Update Display
-pygame.display.update()
+class mainMenu:
+    def __init__(self) -> None:
+        pass
 
-switch = False
-created = False
+    def buildMenu(self, screen):
+        # Sprite Load
+        grass = pygame.image.load('sprites/Tilesets/tiles/new/grass.png').convert_alpha()
+        char = pygame.image.load('sprites/Characters/char.png').convert_alpha()
+        cloudModel3_4 = pygame.image.load('sprites/Characters/Cloud.png').convert_alpha()
+        HillsSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
+        GrassSprite = pygame.image.load('sprites/Tilesets/tiles/new/grasshills.png').convert_alpha()
+        TitleSprite = pygame.image.load('sprites/title.png').convert_alpha()
 
-while switch == False:
-    for event in pygame.event.get():
-        if event.type == pygame.MOUSEBUTTONDOWN:
-            if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
-                switch = True
-                if created == False:
-                    #Taylor
-                    clock = pygame.time.Clock()
-                    game = Game(screen)
-                    game.set_up()
+        # Import
+        grassSheet = spritesheet.SpriteSheet(grass)
+        charSheet = spritesheet.SpriteSheet(char)
+        cloud3_4Sheet = spritesheet.SpriteSheet(cloudModel3_4)
+        HillsImg = spritesheet.SpriteSheet(HillsSprite)
+        GrassImg = spritesheet.SpriteSheet(GrassSprite)
+        TitleImg = spritesheet.SpriteSheet(TitleSprite)
 
-                    while game.game_state == GameState.RUNNING:
+        # Width of IMG, Hight of IMG, Starting Pixel X, Starting Pixel Y, Scale X, Scale Y, Background Color To Remove, Frame
+        bg = grassSheet.get_image(16, 16, 16, 16, 120, 67.5, config.BLACK)
+        bunny = charSheet.get_image(48, 48, 0, 0, 4, 4, config.BLACK)
+        cloud3_4 = cloud3_4Sheet.get_image(47, 30, 0, 0, 3, 3, config.BLACK)
+        hillsLeft = HillsImg.get_image(47/3, 47, 0, 0, 6, 6, config.BLACK)
+        hillsMid = HillsImg.get_image(47/3, 47, 47/3, 0, 6, 6, config.BLACK)
+        hillsRight = HillsImg.get_image(47/3, 47, ((50*2)/3), 0, 6, 6, config.BLACK)
+        GrassTexture = GrassImg.get_image(16, 16, 0, 80, 4, 4, config.BLACK)
+        TitleTop = TitleImg.get_image(59, 7, 23, 17, 10, 10, config.WHITE)
+        TitleBottom = TitleImg.get_image(59, 7, 23, 25, 10, 10, config.WHITE)
 
-                        clock.tick(60)
-                        game.update()
-                        pygame.display.flip()
-                        pygame.display.update()
-                    created = True
+        # Screen Background
+        screen.fill(config.SCREEN_FILL)
 
-    # Defines Mouse
-    if switch == False:
-        mouse = pygame.mouse.get_pos()
+        #Background
+        screen.blit(bg, (0, 0))
 
-        if 810 <= mouse[0] <= 1100 and 780 <= mouse[1] <= 970:
-            pygame.draw.rect(screen,Light_Button,[(width-260)/2, 810, 260, 170])
+        j = 1
+        y = 1
+        for j in range (900):
+            for y in range (30):
+                if j % 3 == 0 and y % 2 == 0 and random.uniform(0,1) >= 0.3:
+                    screen.blit(GrassTexture, (j * (64 * random.uniform(0,1)), y * (64 * random.uniform(0,1))))
+                y += 1
+            j += 1
 
-        else:
-            pygame.draw.rect(screen,Dark_Button,[(width-260)/2, 810, 260, 170])
+        screen.blit(bunny, (((config.WIDTH-192)/2), ((config.HEIGHT*2.25)/3)-146))
+        screen.blit(hillsLeft, (-32, -84))
 
-        screen.blit(ply, ((width-280)/2, (height*2.25)/3))
+        # Length Hills
+        screen.blit(hillsMid, (1800, -84))
 
-    pygame.display.update()
+        i = 0
+        while i < 19:
+            screen.blit(hillsMid, (94 * i, 32))
+            i += 1
 
-pygame.quit()
+        screen.blit(hillsRight, (1780, 32))
+
+        i = 0
+        while i < 20:
+            screen.blit(hillsMid, (94 * i, -84))
+            i += 1
+
+        screen.blit(hillsRight, (1880, -84))
+
+        screen.blit(cloud3_4, (1700, 32))
+
+        screen.blit(TitleTop, (32, 32))
+        screen.blit(TitleBottom, (700, 32))
+
+## -------------------------------- PyGame Class Object
+
+app = PyGame()
+app.run() ## Start App
+
+## --------------------------------
