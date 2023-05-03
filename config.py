@@ -22,5 +22,5 @@ MOVEMENT_SPEED = 60
 
 ## -------------------------------- Game Dev Tools
 
-#-1 Turns Fade Off (For Development Testing Speed), 0 for Fade On
+# Fade Off == (-1), Fade On == (0) ## ------ (Faster To Test With Fade Off)
 FADED = 0
